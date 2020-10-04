@@ -11,5 +11,9 @@ namespace AddressBook
         {
             this.ContactList = new List<Contact>();
         }
+        public void AddContact(Contact obj)
+        {
+            this.ContactList.Add(obj);
+        }
     }
 }
