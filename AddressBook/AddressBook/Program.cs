@@ -13,7 +13,14 @@ namespace AddressBook
             AddressBookSystem addressbook = new AddressBookSystem();           
             Contact contact = new Contact();
             SetDetails(contact);
-            addressbook.AddContact(contact); 
+            addressbook.AddContact(contact);
+            Console.WriteLine("\n");
+            Console.WriteLine("Enter the First Name of Contact you want to edit :");
+            string Firstnameedit = Console.ReadLine();
+            Console.WriteLine("Enter Last Name of Contact you want to edit :");
+            string Lastnameedit = Console.ReadLine();
+            Console.WriteLine("\n");
+            addressbook.EditContact(Firstnameedit, Lastnameedit);
         }
         public static void SetDetails(Contact contact)
         {
