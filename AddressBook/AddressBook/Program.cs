@@ -21,6 +21,13 @@ namespace AddressBook
             string Lastnameedit = Console.ReadLine();
             Console.WriteLine("\n");
             addressbook.EditContact(Firstnameedit, Lastnameedit);
+            Console.WriteLine("\n");
+            Console.WriteLine("Enter the First Name of Contact you want to delete :");
+            string Firstnamedelete = Console.ReadLine();
+            Console.WriteLine("Enter the Last Name of Contact you want to delete :");
+            string Lastnamedelete = Console.ReadLine();
+            Console.WriteLine("\n");
+            addressbook.DeleteContact(Firstnamedelete, Lastnamedelete);
         }
         public static void SetDetails(Contact contact)
         {

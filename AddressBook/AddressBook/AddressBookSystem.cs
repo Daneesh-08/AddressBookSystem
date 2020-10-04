@@ -108,5 +108,22 @@ namespace AddressBook
             Console.WriteLine("PhoneNumber : " + contact.PhoneNumber);
             Console.WriteLine("Email id : " + contact.Email);
         }
+        public void DeleteContact(string firstname, string lastname)
+        {
+            Contact contactdelete = null;
+            foreach (Contact contact in this.ContactList)
+            {
+                if (contact.FirstName == firstname && contact.LastName == lastname)
+                {
+                    contactdelete = contact;
+                    this.ContactList.Remove(contactdelete);
+                    break;
+                }
+            }
+            if (contactdelete == null)
+                Console.WriteLine("Contact does not exist !!");
+            else
+                Console.WriteLine("Contact Deleted Successfully !!");
+        }
     }
 }
