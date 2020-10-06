@@ -8,12 +8,16 @@ namespace AddressBook
         {            
             Console.WriteLine("Welcome To Address Book Program on Master Branch ");
             Console.WriteLine("\n");
-            Console.WriteLine("Add the Contact Details ");
-            Console.WriteLine("\n");
-            AddressBookSystem addressbook = new AddressBookSystem();           
+            AddressBookSystem addressbook = new AddressBookSystem();
             Contact contact = new Contact();
-            SetDetails(contact);
-            addressbook.AddContact(contact);
+            Console.WriteLine("How many contacts you want to add ?");
+            int option = Convert.ToInt32(Console.ReadLine());
+            for (int i = 1; i <= option; i++)
+            {
+                SetDetails(contact);
+                addressbook.AddContact(contact);
+                Console.WriteLine("\n");
+            }
             Console.WriteLine("\n");
             Console.WriteLine("Enter the First Name of Contact you want to edit :");
             string Firstnameedit = Console.ReadLine();
