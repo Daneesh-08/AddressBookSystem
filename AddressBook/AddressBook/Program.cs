@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace AddressBook
 {
@@ -8,14 +9,27 @@ namespace AddressBook
         {            
             Console.WriteLine("Welcome To Address Book Program on Master Branch ");
             Console.WriteLine("\n");
-            AddressBookSystem addressbook = new AddressBookSystem();
+            Dictionary<string, AddressBookSystem> dictionary = new Dictionary<string, AddressBookSystem>();
             Contact contact = new Contact();
-            Console.WriteLine("How many contacts you want to add ?");
-            int option = Convert.ToInt32(Console.ReadLine());
-            for (int i = 1; i <= option; i++)
+            AddressBookSystem addressbook = new AddressBookSystem();
+            Console.WriteLine("How many Address Book you want to Add ?");
+            int numaddressbook = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("\n");
+            for (int count = 1; count <= numaddressbook; count++)
             {
+                Console.WriteLine("Address Book " + count + ": ");
+                string nameaddressbook = Console.ReadLine();
+                dictionary.Add(nameaddressbook, addressbook);
+                Console.WriteLine("\n");
+            }
+            Console.WriteLine("Enter the Address Book where you want to Add Contacts");
+            string addcontact = Console.ReadLine();
+            Console.WriteLine("How many contacts you want to Add ?");
+            int numcontact = Convert.ToInt32(Console.ReadLine());
+            for (int count = 1; count <= numcontact; count++)
+            {
+                AddressBookSystem AddressBook = dictionary[addcontact];
                 SetDetails(contact);
-                addressbook.AddContact(contact);
                 Console.WriteLine("\n");
             }
             Console.WriteLine("\n");
