@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AddressBook
@@ -11,9 +12,31 @@ namespace AddressBook
         {
             this.ContactList = new List<Contact>();
         }
-        public void AddContact(Contact obj)
+        public void addContacts(string fistName, string lastName, string address, string city, string state, int zip, long phoneNumber, string email)
         {
-            this.ContactList.Add(obj);
+            bool duplicate = equals(fistName, lastName);
+            if (!duplicate)
+            {
+                Contact contact = new Contact();
+                contact.FirstName = fistName;
+                contact.LastName = lastName;
+                contact.Address = address;
+                contact.City = city;
+                contact.State = state;
+                contact.Zip = zip;
+                contact.PhoneNumber = phoneNumber;
+                contact.Email = email;
+                this.ContactList.Add(contact);
+            }
+            else
+                Console.WriteLine("Oops !! Can't Add Duplicate Contact");
+        }
+        private bool equals(string firstname, string lastname)
+        {
+            if (this.ContactList.Any(e => e.FirstName == firstname && e.LastName == lastname))
+                return true;
+            else
+                return false;
         }
         public void EditContact(string firstname, string lastname)
         {
