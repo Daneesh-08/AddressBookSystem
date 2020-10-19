@@ -148,5 +148,23 @@ namespace AddressBook
             else
                 Console.WriteLine("Contact Deleted Successfully !!");
         }
+        public List<String> findPersons(string place)
+        {
+            List<String> personsFounded = new List<string>();
+            foreach (Contact contact in ContactList.FindAll(e => (e.City.Equals(place))).ToList())
+            {
+                string name = contact.FirstName + " " + contact.LastName;
+                personsFounded.Add(name);
+            }
+            if (personsFounded.Count == 0)
+            {
+                foreach (Contact contact in ContactList.FindAll(e => (e.State.Equals(place))).ToList())
+                {
+                    string name = contact.FirstName + " " + contact.LastName;
+                    personsFounded.Add(name);
+                }
+            }
+            return personsFounded;
+        }
     }
 }
