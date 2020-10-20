@@ -7,7 +7,7 @@ namespace AddressBook
     class Program
     {
         static void Main(string[] args)
-        {            
+        {
             Console.WriteLine("Welcome To Address Book Program on Master Branch ");
             Console.WriteLine("\n");
             Dictionary<string, AddressBookSystem> dictionary = new Dictionary<string, AddressBookSystem>();
@@ -50,20 +50,66 @@ namespace AddressBook
             Console.WriteLine("Enter the Last Name of Contact you want to delete :");
             string Lastnamedelete = Console.ReadLine();
             Console.WriteLine("\n");
-            dictionary[deletecontact].DeleteContact(Firstnamedelete, Lastnamedelete);
-            Console.WriteLine("Enter City or State where you want to find Person");
-            string SearchPerson = Console.ReadLine();
+            dictionary[deletecontact].DeleteContact(Firstnamedelete, Lastnamedelete);            
+            Console.WriteLine("Press c for city or s for state");
+            string place = Console.ReadLine();
+            place = place.ToLower();
+            Console.WriteLine("Enter name of place");
+            String findPlace = Console.ReadLine();
+            Dictionary<string, List<string>> dictionaryCity = new Dictionary<string, List<string>>();
+            Dictionary<string, List<string>> dictionaryState = new Dictionary<string, List<string>>();
             foreach (var element in dictionary)
             {
-                List<String> ListofPersons = element.Value.findPersons(SearchPerson);
-                if (ListofPersons.Count == 0)
-                    Console.WriteLine("No Person Found in City or State for Address Book " + element.Key);
+                List<String> listOfPersonsinPlace = new List<string>();
+                if (place.Equals("c"))
+                {
+                    listOfPersonsinPlace = element.Value.PersonsInCity(findPlace);
+                    foreach (var name in listOfPersonsinPlace)
+                    {
+                        if (!dictionaryCity.ContainsKey(findPlace))
+                        {
+                            List<string> list = new List<string>();
+                            list.Add(name);
+                            dictionaryCity.Add(findPlace, list);
+                        }
+                        else
+                            dictionaryCity[findPlace].Add(name);
+                    }
+                }
                 else
                 {
-                    Console.WriteLine("Persons in City or State for Address Book " + element.Key + " :");
-                    foreach (var name in ListofPersons)
-                        Console.WriteLine(name);
+                    listOfPersonsinPlace = element.Value.PersonsInState(findPlace);
+                    foreach (var name in listOfPersonsinPlace)
+                    {
+                        if (!dictionaryState.ContainsKey(findPlace))
+                        {
+                            List<string> list = new List<string>();
+                            list.Add(name);
+                            dictionaryState.Add(findPlace, list);
+                        }
+                        else
+                            dictionaryState[findPlace].Add(name);
+                    }
                 }
+            }
+            if (dictionaryCity.Count != 0)
+            {
+                Console.WriteLine("Persons in the city :-");
+                foreach (var mapElement in dictionaryCity)
+                {
+                    foreach (var listElement in mapElement.Value)
+                        Console.WriteLine(listElement);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Persons in the state :-");
+                foreach (var mapElement in dictionaryState)
+                {
+                    foreach (var listElement in mapElement.Value)
+                        Console.WriteLine(listElement);
+                }
+
             }
         }
         public static void SetDetails(AddressBookSystem obj)

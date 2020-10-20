@@ -166,5 +166,33 @@ namespace AddressBook
             }
             return personsFounded;
         }
+        public List<String> PersonsInCity(string place)
+        {
+            List<String> PersonsFound = new List<string>();
+            foreach (Contact contact in ContactList.FindAll(e => (e.City.Equals(place))).ToList())
+            {
+                string name = contact.FirstName + " " + contact.LastName;
+                PersonsFound.Add(name);
+            }
+            if (PersonsFound.Count == 0)
+            {
+                foreach (Contact contact in ContactList.FindAll(e => (e.State.Equals(place))).ToList())
+                {
+                    string name = contact.FirstName + " " + contact.LastName;
+                    PersonsFound.Add(name);
+                }
+            }
+            return PersonsFound;
+        }
+        public List<String> PersonsInState(string place)
+        {
+            List<String> PersonsFound = new List<string>();
+            foreach (Contact contact in ContactList.FindAll(e => (e.State.Equals(place))).ToList())
+            {
+                string name = contact.FirstName + " " + contact.LastName;
+                PersonsFound.Add(name);
+            }
+            return PersonsFound;
+        }
     }
 }
