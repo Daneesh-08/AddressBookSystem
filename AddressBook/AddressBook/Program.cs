@@ -54,6 +54,8 @@ namespace AddressBook
             Console.WriteLine("Press c for city or s for state");
             string place = Console.ReadLine();
             place = place.ToLower();
+            int CountInCity = 0;
+            int CountInState = 0;
             Console.WriteLine("Enter name of place");
             String findPlace = Console.ReadLine();
             Dictionary<string, List<string>> dictionaryCity = new Dictionary<string, List<string>>();
@@ -75,6 +77,8 @@ namespace AddressBook
                         else
                             dictionaryCity[findPlace].Add(name);
                     }
+
+                    CountInCity += element.Value.NumberOfPersonsInCity(findPlace);
                 }
                 else
                 {
@@ -90,11 +94,14 @@ namespace AddressBook
                         else
                             dictionaryState[findPlace].Add(name);
                     }
+                    CountInState += element.Value.NumberOfPersonsInState(findPlace);
                 }
             }
             if (dictionaryCity.Count != 0)
             {
-                Console.WriteLine("Persons in the city :-");
+                Console.WriteLine("Number of persons present in the CITY = " + CountInCity);
+                Console.WriteLine("\n");
+                Console.WriteLine("Persons in the city are :");
                 foreach (var mapElement in dictionaryCity)
                 {
                     foreach (var listElement in mapElement.Value)
@@ -103,7 +110,9 @@ namespace AddressBook
             }
             else
             {
-                Console.WriteLine("Persons in the state :-");
+                Console.WriteLine("Number of persons present in the STATE = " + CountInState);
+                Console.WriteLine("\n");
+                Console.WriteLine("Persons in the state are :");
                 foreach (var mapElement in dictionaryState)
                 {
                     foreach (var listElement in mapElement.Value)

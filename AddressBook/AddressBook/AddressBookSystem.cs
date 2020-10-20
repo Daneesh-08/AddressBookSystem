@@ -194,5 +194,15 @@ namespace AddressBook
             }
             return PersonsFound;
         }
+        public int NumberOfPersonsInCity(string place)
+        {
+            int numberOfPersons = ContactList.FindAll(e => (e.City.Equals(place))).Count;
+            return numberOfPersons;
+        }
+        public int NumberOfPersonsInState(string place)
+        {
+            int numberOfPersons = ContactList.FindAll(e => (e.State.Equals(place))).Count;
+            return numberOfPersons;
+        }
     }
 }
